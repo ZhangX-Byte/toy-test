@@ -46,5 +46,4 @@ public class StudentControllerTest {
         Assertions.assertNotNull(responseEntity.getBody());
         Assertions.assertTrue(responseEntity.getBody().getSucceeded());
     }
-
 }
