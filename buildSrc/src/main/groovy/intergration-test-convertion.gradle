@@ -1,0 +1,39 @@
+plugins {
+    id 'java'
+}
+
+version = '1.0.0'
+group = 'com.toy.test'
+
+
+def integrationTest = sourceSets.create('integrationTest')
+
+configurations[integrationTest.implementationConfigurationName].extendsFrom(configurations.testImplementation)
+configurations[integrationTest.runtimeOnlyConfigurationName].extendsFrom(configurations.testRuntimeOnly)
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
+
+def integrationTestTask = tasks.register('integrationTest', Test) {
+    description = 'Runs integration tests.'
+    group = 'verification'
+
+    useJUnitPlatform()
+
+    testClassesDirs = integrationTest.output.classesDirs
+    classpath = configurations[integrationTest.runtimeClasspathConfigurationName] + integrationTest.output
+
+    shouldRunAfter(tasks.named('test'))
+}
+
+tasks.named('check') {
+    dependsOn(integrationTestTask)
+}
+
+dependencies {
+    testImplementation "org.springframework.boot:spring-boot-starter-test:2.3.9.RELEASE"
+    testImplementation group: 'com.h2database', name: 'h2', version: '1.4.200'
+
+    integrationTestImplementation project
+}

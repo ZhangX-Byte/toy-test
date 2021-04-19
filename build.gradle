@@ -2,13 +2,13 @@ plugins {
     id 'java'
     id "org.springframework.boot" version "2.3.9.RELEASE"
     id 'org.jetbrains.kotlin.jvm' version '1.4.32'
+    id 'intergration-test-convertion'
 }
 
-apply from: 'config.gradle'
 apply from: file('compile.gradle')
 
-group rootProject.ext.projectDes.group
-version rootProject.ext.projectDes.version
+group "com.toy.test"
+version "1.0.0"
 
 repositories {
     mavenCentral()
@@ -16,22 +16,16 @@ repositories {
 
 
 dependencies {
-    implementation rootProject.ext.dependenciesMap["lombok"]
-    annotationProcessor rootProject.ext.dependenciesMap["lombok"]
-    implementation rootProject.ext.dependenciesMap["commons-lang3"]
-    implementation rootProject.ext.dependenciesMap["dozer-core"]
-    implementation rootProject.ext.dependenciesMap["mybatis-plus"]
-    implementation rootProject.ext.dependenciesMap["spring-boot-starter-web"]
-    implementation rootProject.ext.dependenciesMap["mysql-connector"]
-    implementation rootProject.ext.dependenciesMap["druid"]
+    implementation(libs.lombok)
+    annotationProcessor(libs.lombok)
+    implementation(libs.common.lang3)
+    implementation(libs.web.starter)
+    implementation(libs.dozer.core)
+    implementation(libs.mybatis.plus)
+    implementation(libs.mysql.connector)
+    implementation(libs.druid.starter)
 
-    testImplementation group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: '2.3.9.RELEASE'
-    testImplementation rootProject.ext.dependenciesMap["h2"]
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
-}
-
-test {
-    useJUnitPlatform()
 }
 
 compileKotlin {

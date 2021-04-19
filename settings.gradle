@@ -1,2 +1,23 @@
 rootProject.name = 'com-toy-test'
 
+enableFeaturePreview("VERSION_CATALOGS")
+
+dependencyResolutionManagement {
+    versionCatalogs {
+        libs {
+            alias('spring-boot').to('org.springframework.boot', 'spring-boot-dependencies').versionRef("spring-version")
+            alias('web-starter').to('org.springframework.boot', 'spring-boot-starter-web').versionRef("spring-version")
+            alias('lombok').to('org.projectlombok', 'lombok').versionRef("lombok-version")
+            alias('common-lang3').to('org.apache.commons', 'commons-lang3').versionRef("common-lang3-version")
+            alias('dozer-core').to('com.github.dozermapper', 'dozer-core').versionRef("dozer-core-version")
+            alias('mybatis-plus').to('com.baomidou:mybatis-plus-boot-starter:3.4.2')
+            alias('mysql-connector').to('mysql:mysql-connector-java:8.0.23')
+            alias('druid-starter').to('com.alibaba:druid-spring-boot-starter:1.2.5')
+
+            version("spring-version", "2.3.9.RELEASE")
+            version("lombok-version", "1.18.18")
+            version("common-lang3-version", "3.12.0")
+            version("dozer-core-version", "6.5.2")
+        }
+    }
+}
